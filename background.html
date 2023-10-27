@@ -22,21 +22,21 @@
 
       await replit.messages.showConfirm('[LSP Reloader] BG loaded');
 
-        await replit.extensionPort.internal.commands.registerCommand(replit.proxy({
-          data: {
-            id: 'lsp-reloader',
-            type: 'context',
-            label: 'LSP Reloader',
-            description: 'A Replit extension that can reload LSPs when they die, so that you don\'t have to reboot the Repl all the time.',
-            icon: 'icons/icon.png',
-            contributions: ["commandbar"]
-          },
-          commands: async (...args) => {
-            await replit.messages.showConfirm(JSON.stringify(args));
+      await replit.extensionPort.internal.commands.registerCommand(replit.proxy({
+        data: {
+          id: 'lsp-reloader',
+          type: 'context',
+          label: 'LSP Reloader',
+          description: 'A Replit extension that can reload LSPs when they die, so that you don\'t have to reboot the Repl all the time.',
+          icon: 'icons/icon.png',
+          contributions: ["commandbar"]
+        },
+        commands: async (...args) => {
+          await replit.messages.showConfirm(JSON.stringify(args));
 
-            return [];
-          }
-        }));
+          return [];
+        }
+      }));
     });
   </script>
 </head>
