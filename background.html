@@ -27,6 +27,18 @@
 
       console.debug('[LSP Reloader] dotReplit:', dotReplit);
 
+      const lsps = [];
+      for (const [langId, lang] of Object.entries(dotReplit.languages)) {
+        if (!lang?.languageServer?.start) {
+          continue;
+        }
+
+        lsps.push({
+          id: langId,
+          cmd: lang.languageServer.start
+        });
+      }
+
       await replit.extensionPort.internal.commands.registerCommand(replit.proxy({
         data: {
           id: 'lsp-reloader',
@@ -36,10 +48,23 @@
           icon: 'icons/icon.png',
           contributions: ["commandbar"]
         },
-        commands: async (...args) => {
-          await replit.messages.showConfirm(JSON.stringify(args));
+        commands: async ({active}) => {
+          if (!active) {
+            return replit.proxy([]);
+          }
 
-          return [];
+          return replit.proxy(lsps.map((lsp) => replit.proxy({
+            data: {
+              id: `lsp-reloader-${lsp.id}`,
+              type: 'action',
+              label: lsp.id,
+              description: lsp.id,
+              icon: 'icons/icon.png'
+            },
+            run: async (...args) => {
+              await replit.messages.showNotice('[LSP Reloader] TODO: reload LSP:', JSON.stringify(args));
+            }
+          })));
         }
       }));
     });
