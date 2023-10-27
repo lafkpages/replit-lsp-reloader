@@ -16,13 +16,15 @@
         await replit.extensionPort.internal.commands.registerCommand(replit.proxy({
           data: {
             id: 'lsp-reloader',
-            type: 'action',
+            type: 'context',
             label: 'LSP Reloader',
             description: 'A Replit extension that can reload LSPs when they die, so that you don\'t have to reboot the Repl all the time.',
             contributions: ["commandbar"]
           },
-          run: async (...args) => {
+          commands: async (...args) => {
             await replit.messages.showConfirm(JSON.stringify(args));
+
+            return [];
           }
         }));
     });
