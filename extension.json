@@ -4,8 +4,14 @@
   "background": {
     "page": "background.html"
   },
-  "scopes": [{
-    "name": "write-exec",
-    "reason": "Execute code to kill the LSPs."
-  }]
+  "scopes": [
+    {
+      "name": "read",
+      "reason": "Read your .replit file to detect configured LSPs."
+    },
+    {
+      "name": "write-exec",
+      "reason": "Execute code to kill the LSPs."
+    }
+  ]
 }
