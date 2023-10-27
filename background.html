@@ -22,6 +22,11 @@
 
       await replit.messages.showConfirm('[LSP Reloader] BG loaded');
 
+      const dotReplitRaw = (await replit.fs.readFile('.replit')).content;
+      const dotReplit = ION.parse(dotReplitRaw);
+
+      console.debug('[LSP Reloader] dotReplit:', dotReplit);
+
       await replit.extensionPort.internal.commands.registerCommand(replit.proxy({
         data: {
           id: 'lsp-reloader',
