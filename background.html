@@ -1,21 +1,36 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>LSP Reloader</title>
 
-    <script src="https://unpkg.com/@replit/extensions@1.8.0/dist/index.global.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', async () => {
-        await replit.init();
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>LSP Reloader</title>
 
-        await replit.messages.showConfirm('[LSP Reloader] BG loaded');
-      });
-    </script>
-  </head>
+  <script src="https://unpkg.com/@replit/extensions@1.9.0/dist/index.global.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await replit.init();
 
-  <body>
-    
-  </body>
+      await replit.messages.showConfirm('[LSP Reloader] BG loaded');
+
+        await replit.extensionPort.internal.commands.registerCommand(replit.proxy({
+          data: {
+            id: 'lsp-reloader',
+            type: 'action',
+            label: 'LSP Reloader',
+            description: 'A Replit extension that can reload LSPs when they die, so that you don\'t have to reboot the Repl all the time.',
+            contributions: ["commandbar"]
+          },
+          run: async (...args) => {
+            await replit.messages.showConfirm(JSON.stringify(args));
+          }
+        }));
+    });
+  </script>
+</head>
+
+<body>
+
+</body>
+
 </html>
