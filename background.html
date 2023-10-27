@@ -8,6 +8,15 @@
 
   <script src="https://unpkg.com/@replit/extensions@1.9.0/dist/index.global.js"></script>
   <script>
+    module = {
+      exports: {}
+    };
+  </script>
+  <script src="https://unpkg.com/ion-parser@0.5.2/parser.js"></script>
+  <script>
+    delete module;
+  </script>
+  <script>
     document.addEventListener('DOMContentLoaded', async () => {
       await replit.init();
 
