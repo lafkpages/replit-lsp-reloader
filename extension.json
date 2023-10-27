@@ -13,5 +13,6 @@
       "name": "write-exec",
       "reason": "Execute code to kill the LSPs."
     }
-  ]
+  ],
+  "icon": "icons/icon.png"
 }
