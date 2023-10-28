@@ -17,6 +17,18 @@
     delete module;
   </script>
   <script>
+    /** 
+     * @param {string} lspCmd
+     * @returns {string} The LSP's PID
+     */
+    async function psLsp(lspCmd) {
+      const ps = (await replit.exec.exec('ps -ef | grep ' + JSON.stringify(
+        lspCmd.replace(/([a-z])/i, '[$1]')
+      ))).output;
+
+      return ps.match(/^(\w+)\s+(\d+)/i)[2];
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       await replit.init();
 
@@ -39,6 +51,16 @@
         });
       }
 
+      if (lsps.length) {
+        console.groupCollapsed('[LSP Reloader] Found', lsps.length, 'configured LSPs');
+        for (const lsp of lsps) {
+          console.debug(lsp);
+        }
+        console.groupEnd();
+      } else {
+        console.debug('[LSP Reloader] Found no configured LSPs');
+      }
+
       await replit.extensionPort.internal.commands.registerCommand(replit.proxy({
         data: {
           id: 'lsp-reloader',
@@ -48,7 +70,7 @@
           icon: 'icons/icon.png',
           contributions: ["commandbar"]
         },
-        commands: async ({active}) => {
+        commands: async ({ active }) => {
           if (!active) {
             return replit.proxy([]);
           }
@@ -61,8 +83,13 @@
               description: lsp.id,
               icon: 'icons/icon.png'
             },
-            run: async (...args) => {
-              await replit.messages.showNotice('[LSP Reloader] TODO: reload LSP:', JSON.stringify(args));
+            run: async () => {
+              // Get the LSP's PID
+              const pid = await psLsp(lsp.cmd);
+
+              // Kill it
+              console.debug('[LSP Reloader] Killing', lsp.id, 'LSP with PID', pid);
+              await replit.exec.exec(`kill ${pid}`);
             }
           })));
         }
