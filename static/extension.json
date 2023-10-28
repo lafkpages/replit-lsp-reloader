@@ -1,0 +1,26 @@
+{
+  "name": "LSP Reloader",
+  "description": "A Replit extension that can reload LSPs when they die, so that you don't have to reboot the Repl all the time.",
+  "longDescription": "A Replit extension that can reload LSPs when they die, so that you don't have to reboot the Repl all the time.\n\nThanks @IroncladDev for the idea.",
+  "background": {
+    "page": "background.html"
+  },
+  "scopes": [
+    {
+      "name": "read",
+      "reason": "Read your .replit file to detect configured LSPs."
+    },
+    {
+      "name": "write-exec",
+      "reason": "Execute code to kill the LSPs."
+    }
+  ],
+  "icon": "icons/icon.png",
+  "tools": [
+    {
+      "name": "LSPs",
+      "icon": "icons/icon.png",
+      "handler": "/"
+    }
+  ]
+}

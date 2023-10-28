@@ -1,0 +1,13 @@
+.config
+.build
+build
+dist
+.cache
+.upm
+.tmp
+.git
+.svelte-kit
+node_modules
+.breakpoints
+vite.config.js.timestamp-*
+pnpm-lock.yaml

@@ -1,0 +1,57 @@
+compile = "./scripts/onBoot.sh"
+run = "pnpm run dev"
+entrypoint = "src/routes/+page.svelte"
+
+hidden = [
+  ".config",
+  "tsconfig.json",
+  "tsconfig.node.json",
+  "vite.config.js",
+  ".gitignore",
+  ".svelte-kit",
+  "build",
+  ".npmrc",
+  "pnpm-lock.yaml",
+  ".prettier*"
+]
+
+[nix]
+channel = "stable-22_11"
+
+[env]
+XDG_CONFIG_HOME = "$REPL_HOME/.config"
+npm_config_prefix = "$XDG_CONFIG_HOME/npm/node_global"
+PATH = "$npm_config_prefix/bin:$REPL_HOME/node_modules/.bin"
+PNPM_HOME = "$XDG_CONFIG_HOME/pnpm"
+ADAPTER = "node"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]
+
+[packager]
+language = "nodejs-pnpm"
+
+  [packager.features]
+  packageSearch = true
+  guessImports = false
+  enabledForHosting = false
+
+[languages]
+
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
+
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"
+
+[languages.svelte]
+pattern = "**/{*.svelte}"
+
+[languages.svelte.languageServer]
+start = "svelteserver --stdio"
+
+[extension]
+isExtension = true
+buildCommand = "./scripts/build.sh"
+outputDirectory = "build"
+
