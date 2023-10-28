@@ -183,5 +183,6 @@ requiredFiles = [".replit", "replit.nix", ".config"]
 
 [extension]
 isExtension = true
-buildCommand = " "
+buildCommand = ""
 outputDirectory = "."
+extensionID = "7834332c-347e-4918-b6d4-0bdc8551d019"
