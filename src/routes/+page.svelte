@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount } from 'svelte';
 
   import { loadLsps as _loadLsps } from '$lib/lsp';
   import type { Lsp as ILsp } from '$lib/lsp';
@@ -9,7 +9,6 @@
   import Loader from '@replit-svelte/ui/icons/Loader.svelte';
 
   let lsps: ILsp[] | null = null;
-  let timeout = 0;
 
   let loading = false;
 
@@ -22,9 +21,6 @@
   };
 
   onMount(loadLsps);
-  onDestroy(() => {
-    clearTimeout(timeout);
-  });
 </script>
 
 <svelte:head>
