@@ -32,8 +32,6 @@
     document.addEventListener('DOMContentLoaded', async () => {
       await replit.init();
 
-      await replit.messages.showConfirm('[LSP Reloader] BG loaded');
-
       const dotReplitRaw = (await replit.fs.readFile('.replit')).content;
       const dotReplit = ION.parse(dotReplitRaw);
 
