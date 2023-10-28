@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
+  import { dev } from '$app/environment';
+
   import { extensionPort, proxy, exec } from '@replit/extensions';
 
   import { loadLsps } from '$lib/lsp';
@@ -16,9 +18,13 @@
     await extensionPort.internal.commands.registerCommand(
       proxy({
         data: {
-          id: 'lsp-reloader',
+          id: dev
+            ? 'lsp-reloader-dev'
+            : 'lsp-reloader',
           type: 'context',
-          label: 'LSP Reloader',
+          label: dev
+            ? 'LSP Reloader (dev)'
+            : 'LSP Reloader',
           description:
             "A Replit extension that can reload LSPs when they die, so that you don't have to reboot the Repl all the time.",
           icon: 'icons/icon.png',
