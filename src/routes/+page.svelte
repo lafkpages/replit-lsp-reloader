@@ -6,6 +6,7 @@
 
   import Lsp from '$lib/components/Lsp.svelte';
 
+  import Button from '@replit-svelte/ui/Button.svelte';
   import Loader from '@replit-svelte/ui/icons/Loader.svelte';
 
   let lsps: ILsp[] | null = null;
@@ -27,7 +28,18 @@
   <title>LSP Reloader</title>
 </svelte:head>
 
-<h1 class="headerDefault">LSPs</h1>
+<header>
+  <h1 class="headerDefault">LSPs</h1>
+
+  <Button
+    variant="outlined"
+    text="Refresh"
+    disabled={loading}
+    on:click={() => {
+      loadLsps();
+    }}
+  />
+</header>
 
 {#if lsps}
   <ul>
@@ -51,6 +63,12 @@
 </div>
 
 <style>
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   ul {
     list-style-type: none;
   }
