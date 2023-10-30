@@ -3,7 +3,7 @@
 
   import { dev } from '$app/environment';
 
-  import { extensionPort, proxy, exec } from '@replit/extensions';
+  import { experimental, proxy, exec } from '@replit/extensions';
 
   import { loadLsps } from '$lib/lsp';
   import type { Lsp as ILsp } from '$lib/lsp';
@@ -11,11 +11,11 @@
   let lsps: ILsp[] | null = null;
 
   onMount(async () => {
-    lsps = await loadLsps();
-
     console.debug('[LSP Reloader] BG loaded');
 
-    await extensionPort.internal.commands.registerCommand(
+    lsps = await loadLsps();
+
+    experimental.commands.register(
       proxy({
         data: {
           id: dev
@@ -30,8 +30,8 @@
           icon: 'icons/icon.png',
           contributions: ['commandbar'],
         },
-        commands: async ({ active }) => {
-          if (!active || !lsps) {
+        commands: async () => {
+          if (!lsps) {
             return proxy([]);
           }
 

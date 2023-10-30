@@ -13,6 +13,10 @@
     {
       "name": "write-exec",
       "reason": "Execute code to kill the LSPs."
+    },
+    {
+      "name": "experimental-api",
+      "reason": "Lets you reload LSPs from the command palette."
     }
   ],
   "icon": "icons/icon.png",
