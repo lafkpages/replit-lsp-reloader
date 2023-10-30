@@ -18,13 +18,9 @@
     experimental.commands.register(
       proxy({
         data: {
-          id: dev
-            ? 'lsp-reloader-dev'
-            : 'lsp-reloader',
+          id: dev ? 'lsp-reloader-dev' : 'lsp-reloader',
           type: 'context',
-          label: dev
-            ? 'LSP Reloader (dev)'
-            : 'LSP Reloader',
+          label: dev ? 'LSP Reloader (dev)' : 'LSP Reloader',
           description:
             "A Replit extension that can reload LSPs when they die, so that you don't have to reboot the Repl all the time.",
           icon: 'icons/icon.png',
