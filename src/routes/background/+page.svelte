@@ -21,8 +21,7 @@
           id: dev ? 'lsp-reloader-dev' : 'lsp-reloader',
           type: 'context',
           label: dev ? 'LSP Reloader (dev)' : 'LSP Reloader',
-          description:
-            "A Replit extension that can reload LSPs when they die, so that you don't have to reboot the Repl all the time.",
+          description: 'Reload LSPs',
           icon: 'icons/icon.png',
           contributions: ['commandbar'],
         },
@@ -38,7 +37,9 @@
                   id: `lsp-reloader-${lsp.id}`,
                   type: 'action',
                   label: lsp.id,
-                  description: lsp.id,
+                  description: `LSP ID "${lsp.id}", PID ${
+                    lsp.pid || 'unknown'
+                  }`,
                   icon: 'icons/icon.png',
                 },
                 run: async () => {
