@@ -14,10 +14,12 @@
     "@replit-svelte/types": "^1.4.1",
     "@replit-svelte/ui": "^1.4.7",
     "@replit-svelte/utils": "^1.1.2",
-    "@replit/extensions": "^1.9.0",
+    "@replit/extensions": "^1.10.0",
     "@sveltejs/adapter-static": "^2.0.2",
     "@sveltejs/kit": "^1.21.0",
     "@types/cookie": "^0.5.1",
+    "escape-string-regexp": "^5.0.0",
+    "ion-parser": "0.5.2",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "prettier-plugin-toml": "^0.3.1",
@@ -25,7 +27,6 @@
     "svelte-check": "^2.9.2",
     "tslib": "^2.4.1",
     "typescript": "^4.9.3",
-    "vite": "^4.0.5",
-    "ion-parser": "0.5.2"
+    "vite": "^4.0.5"
   }
 }

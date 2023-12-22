@@ -1,15 +1,32 @@
 import { exec } from '@replit/extensions';
+import escapeRegex from 'escape-string-regexp';
 
 import { parseDotReplit } from '$lib/dotReplit';
 
 export async function psLsp(lspCmd: string) {
   const ps = (
     await exec.exec(
-      'ps -ef | grep ' + JSON.stringify(lspCmd.replace(/([a-z])/i, '[$1]'))
+      'ps -ef'
     )
   ).output;
 
-  return ps.match(/^(\w+)\s+(\d+)/i)[2];
+  const fullCmdRegex = new RegExp(`^\\w+\\s+(\\d+).+?${escapeRegex(lspCmd)}`, 'im');
+  const fullCmdMatch = ps.match(fullCmdRegex);
+  if (fullCmdMatch?.[1]) {
+    return fullCmdMatch[1];
+  }
+
+  const partialCmd = lspCmd.match(/^(.+?) /)?.[1] || null;
+  if (partialCmd == null) {
+    return null;
+  }
+  const partialCmdRegex = new RegExp(`^\\w+\\s+(\\d+).+?${escapeRegex(partialCmd)}`, 'im');
+  const partialCmdMatch = ps.match(partialCmdRegex);
+  if (partialCmdMatch?.[1]) {
+    return partialCmdMatch[1];
+  }
+
+  return null;
 }
 
 export interface Lsp {
