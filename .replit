@@ -48,7 +48,7 @@ start = "typescript-language-server --stdio"
 pattern = "**/{*.svelte}"
 
 [languages.svelte.languageServer]
-#start = "svelteserver --stdio"
+start = "svelteserver --stdio"
 
 [extension]
 isExtension = true
